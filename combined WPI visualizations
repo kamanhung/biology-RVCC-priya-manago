@@ -1,0 +1,35 @@
+# Visualizing water quality data for RVCC Pond and Musconetcong River
+
+# Creating the data for visualization
+water_quality_data = {
+    "Test": [
+        "Temperature, △T", "pH", "Turbidity", "Total Solids", "Dissolved Oxygen",
+        "5-Day BOD", "Total Phosphates", "Nitrates", "Fecal Coliform"
+    ],
+    "RVCC Pond Results": [0.453, 6.84, 5.00, 150.00, 115.70, 4.495, 2.10, 2.71, 240.00],
+    "MUSCONETCONG River Results": [0.000, 6.895, 61.00, 62.50, 91.681, 4.100, 0.960, 4.575, 220.00],
+    "Unit": [
+        "°C", "ph Unit", "NTU", "mg/L", "% sat.", "mg/L", "mg/L PO4-P", "mg/L PNO3-N", "CFU/100 mL"
+    ]
+}
+
+# Convert to DataFrame
+water_quality_df = pd.DataFrame(water_quality_data)
+
+# Plotting with specified settings
+fig, ax = plt.subplots(figsize=(12, 8), facecolor='#051b56')
+
+# Multiple bar plots for each data point
+water_quality_df.plot(kind='barh', x='Test', y=['RVCC Pond Results', 'MUSCONETCONG River Results'], ax=ax, color=["#fc6244", "#0298ac"])
+ax.set_title('Water Quality Data Comparison', color='white', fontsize=14, fontweight='bold')
+ax.set_xlabel('Results', color='white', fontsize=12)
+ax.set_ylabel('Test', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["RVCC Pond", "MUSCONETCONG River"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
