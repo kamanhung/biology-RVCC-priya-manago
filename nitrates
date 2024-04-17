@@ -1,0 +1,29 @@
+# Visualizing data with specified metrics
+
+# Creating the data
+data = {
+    "Reading": ["1", "2", "Average"],
+    "RVCC Pond": [2.491, 2.929, 2.710],
+    "MUSCONETCONG River": [4.61, 4.54, 4.575]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Plotting
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='#051b56')
+
+# Bar plot for the provided data
+df.plot(kind='bar', x='Reading', y=['RVCC Pond', 'MUSCONETCONG River'], ax=ax, color=["#fc6244", "#0298ac"])
+ax.set_title('Nitrates Analysis', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Values', color='white', fontsize=12)
+ax.set_xlabel('Reading', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["RVCC Pond", "MUSCONETCONG River"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
