@@ -1,0 +1,29 @@
+# Visualizing Turbidity data using the specified template settings
+
+# Creating the data for Turbidity
+turbidity_data = {
+    "Reading": ["1", "2", "Average Turbidity (NTU)"],
+    "RVCC Pond": [5.2, 4.8, 5.0],
+    "MUSCONETCONG River": [60.5, 61.5, 61.0]
+}
+
+# Convert to DataFrame
+turbidity_df = pd.DataFrame(turbidity_data)
+
+# Plotting with specified settings
+fig, ax = plt.subplots(figsize=(8, 6), facecolor='#051b56')
+
+# Bar plot for Turbidity readings with specified colors and settings
+turbidity_df.plot(kind='bar', x='Reading', y=['RVCC Pond', 'MUSCONETCONG River'], ax=ax, color=["#fc6244", "#0298ac"])
+ax.set_title('Turbidity Readings', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Turbidity (NTU)', color='white', fontsize=12)
+ax.set_xlabel('Reading', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
