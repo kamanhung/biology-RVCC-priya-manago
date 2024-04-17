@@ -1,0 +1,25 @@
+# Combining the Total Solids data into one chart with grouped bars for clarity
+
+# Modifying data to fit into one chart
+total_solids_df['Mass of solids (mg)'] *= 10  # Scale by 10 for better visualization against concentration
+
+# Combining Mass of solids (scaled), Total solids, and Average Total Solids into one plot
+fig, ax = plt.subplots(figsize=(12, 8), facecolor='#051b56')
+
+# Plotting all values
+total_solids_df.plot(kind='bar', x='Beaker Number', 
+                     y=['Mass of solids (mg)', 'Total solids (mg/L)', 'Average Total Solids (mg/L)'],
+                     ax=ax, color=["#fc6244", "#0298ac", "#EB6077"])
+
+ax.set_title('Total Solids Analysis', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Value (mg and mg/L)', color='white', fontsize=12)
+ax.set_xlabel('Beaker Number', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["Mass of solids (mg, scaled)", "Total solids (mg/L)", "Average Total Solids (mg/L)"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
