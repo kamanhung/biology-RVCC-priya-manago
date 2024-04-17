@@ -1,0 +1,32 @@
+# Creating a visualization for Total Phosphates data
+
+# Creating the data for Phosphates visualization
+phosphates_data = {
+    "Location": ["RVCC Pond", "MUSCONETCONG River"],
+    "Absorbance": [1.30, 0.06],
+    "Concentration (mg/L PO4-)": [2.10, 0.96]
+}
+
+# Convert to DataFrame
+phosphates_df = pd.DataFrame(phosphates_data)
+
+# Plotting with specified settings
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='#051b56')
+
+# Multiple bar plots for each data point
+phosphates_df.plot(kind='bar', x='Location', 
+                   y=['Absorbance', 'Concentration (mg/L PO4-)'],
+                   ax=ax, color=["#fc6244", "#0298ac"])
+ax.set_title('Total Phosphates Analysis', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Value', color='white', fontsize=12)
+ax.set_xlabel('Location', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_xticklabels(phosphates_df['Location'], rotation=0)  # Horizontal labels
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["Absorbance", "Concentration (mg/L PO4-)"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
