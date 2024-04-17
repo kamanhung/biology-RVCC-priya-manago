@@ -1,0 +1,70 @@
+# Importing necessary libraries and re-creating the dissolved oxygen data as the code execution state was reset
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Data for Dissolved Oxygen visualization
+dissolved_oxygen_data = {
+    "Location": ["RVCC Pond", "MUSCONETCONG River"],
+    "Dissolved oxygen (mg/L)": [14.108, 10.910],
+    "Water Temperature (°C)": [6.447, 8.000],
+    "Atmospheric Pressure (mmHg)": [760, 760],
+    "100% dissolved oxygen (mg/L)": [12.19, 11.90],
+    "Percent saturation (%)": [115.734, 91.681]
+}
+
+# Convert to DataFrame
+dissolved_oxygen_df = pd.DataFrame(dissolved_oxygen_data)
+
+# Creating five separate charts for each metric of the dissolved oxygen data
+
+# Setting the figure and axes
+fig, axes = plt.subplots(5, 1, figsize=(10, 18), facecolor='#051b56')
+
+# Plotting each metric in a separate chart
+metrics = ['Dissolved oxygen (mg/L)', 'Water Temperature (°C)', 'Atmospheric Pressure (mmHg)', '100% dissolved oxygen (mg/L)', 'Percent saturation (%)']
+colors = ["#fc6244", "#0298ac", "#EB6077", "#fc6244", "#0298ac"]  # Colors for each chart
+
+for i, metric in enumerate(metrics):
+    dissolved_oxygen_df.plot(kind='bar', x='Location', y=metric, ax=axes[i], color=colors[i])
+    axes[i].set_title(metric, color='white', fontsize=12, fontweight='bold')
+    axes[i].set_ylabel('Measurements', color='white', fontsize=10)
+    axes[i].set_xlabel('')
+    axes[i].grid(True, color='gray')
+    axes[i].tick_params(colors='white', which='both')
+    axes[i].set_facecolor('#051b56')
+    for spine in axes[i].spines.values():
+        spine.set_edgecolor('white')
+    axes[i].legend().set_visible(False)
+
+# Adjusting layout for better spacing
+plt.tight_layout()
+plt.show()
+
+# Creating separate charts for each metric of the dissolved oxygen data, and presenting them one by one
+
+# Function to create individual chart
+def create_individual_chart(metric, color, ax):
+    dissolved_oxygen_df.plot(kind='bar', x='Location', y=metric, ax=ax, color=color)
+    ax.set_title(metric, color='white', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Measurements', color='white', fontsize=10)
+    ax.set_xlabel('')
+    ax.grid(True, color='gray')
+    ax.tick_params(colors='white', which='both')
+    ax.set_facecolor('#051b56')
+    for spine in ax.spines.values():
+        spine.set_edgecolor('white')
+    ax.legend().set_visible(False)
+
+# Metrics and their respective colors
+metrics = ['Dissolved oxygen (mg/L)', 'Water Temperature (°C)', 'Atmospheric Pressure (mmHg)', '100% dissolved oxygen (mg/L)', 'Percent saturation (%)']
+colors = ["#fc6244", "#0298ac", "#EB6077", "#fc6244", "#0298ac"]
+
+# Generating individual figures
+figures = []
+for i, metric in enumerate(metrics):
+    fig, ax = plt.subplots(figsize=(10, 4), facecolor='#051b56')
+    create_individual_chart(metric, colors[i], ax)
+    figures.append(fig)
+
+# Display the first chart
+figures[0].show()
