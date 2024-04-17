@@ -1,0 +1,30 @@
+# Visualizing data for Number with a Positive Result in Different Tube Volumes
+
+# Creating the data
+positive_result_data = {
+    "Tube Volume": ["10 ml", "1 ml", "0.1 ml"],
+    "RVCC Pond": [3, 3, 0],
+    "MUSCONETCONG River": [3, 2, 3]
+}
+
+# Convert to DataFrame
+positive_result_df = pd.DataFrame(positive_result_data)
+
+# Plotting
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='#051b56')
+
+# Bar plot for the provided data
+positive_result_df.plot(kind='bar', x='Tube Volume', y=['RVCC Pond', 'MUSCONETCONG River'], ax=ax, color=["#fc6244", "#0298ac"])
+ax.set_title('Number with a Positive Result by Tube Volume', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Number with Positive Result', color='white', fontsize=12)
+ax.set_xlabel('Tube Volume', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_xticklabels(positive_result_df['Tube Volume'], rotation=0)  # Horizontal labels
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["RVCC Pond", "MUSCONETCONG River"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
