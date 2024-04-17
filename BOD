@@ -1,0 +1,35 @@
+# Visualizing BOD data along with initial and final dissolved oxygen levels on the same chart
+
+# Creating the data for BOD visualization
+bod_data = {
+    "Location": ["RVCC Pond", "MUSCONETCONG River"],
+    "Initial dissolved oxygen (mg/L)": [14.108, 12.870],
+    "Final dissolved oxygen (mg/L)": [9.613, 8.770],
+    "BOD (mg/L)": [4.495, 4.100]
+}
+
+# Convert to DataFrame
+bod_df = pd.DataFrame(bod_data)
+
+# Adjusting the chart to make the X-axis labels horizontal
+
+# Plotting with horizontal X-axis labels
+fig, ax = plt.subplots(figsize=(10, 6), facecolor='#051b56')
+
+# Multiple bar plots for each data point
+bod_df.plot(kind='bar', x='Location', 
+            y=['Initial dissolved oxygen (mg/L)', 'Final dissolved oxygen (mg/L)', 'BOD (mg/L)'],
+            ax=ax, color=["#fc6244", "#0298ac", "#EB6077"])
+ax.set_title('BOD and Dissolved Oxygen Levels', color='white', fontsize=14, fontweight='bold')
+ax.set_ylabel('Concentration (mg/L)', color='white', fontsize=12)
+ax.set_xlabel('Location', color='white', fontsize=12)
+ax.grid(True, color='gray')
+ax.tick_params(colors='white', which='both')
+ax.set_xticklabels(bod_df['Location'], rotation=0)  # Setting rotation to 0 for horizontal labels
+ax.set_facecolor('#051b56')
+for spine in ax.spines.values():
+    spine.set_edgecolor('white')
+ax.legend(["Initial dissolved oxygen (mg/L)", "Final dissolved oxygen (mg/L)", "BOD (mg/L)"], facecolor='#edf2fa')
+
+plt.tight_layout()
+plt.show()
