@@ -1,0 +1,51 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Create the data
+data = {
+    "Location": ["RVCC Pond", "MUSCONETCONG River 1", "MUSCONETCONG River 2"],
+    "Temperature 1 (°C)": [6.447, 8.0, 8.0],
+    "Temperature 2 (°C)": [6.9, 8.0, 8.0],
+    "Average Temperature (°C)": [6.6735, 8.0, 8.0],
+    "Temperature Change (°C)": [0.453, 0.0, 0.0],
+    "Air Temperature (°C)": [6.7, 9.4, 9.4],
+    "Water Temperature (°C)": [2.8, 8.0, 8.0]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Plotting
+fig, ax = plt.subplots(2, 1, figsize=(10, 12), sharex=True)
+
+# Setting the font properties
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = 'Helvetica'
+
+# Replotting with Helvetica font
+fig, ax = plt.subplots(2, 1, figsize=(10, 12), sharex=True, facecolor=bg_color)
+
+# Bar plot for probe temperatures and averages with Helvetica font
+df.plot(kind='bar', x='Location', y=['Temperature 1 (°C)', 'Temperature 2 (°C)', 'Average Temperature (°C)'], ax=ax[0], color=colors_probe)
+ax[0].set_title('Probe Temperatures and Average Temperature', color='white')
+ax[0].set_ylabel('Temperature (°C)', color='white')
+ax[0].grid(True, color='gray')
+ax[0].tick_params(colors='white', which='both')
+ax[0].set_facecolor(bg_color)
+for spine in ax[0].spines.values():
+    spine.set_edgecolor('white')
+ax[0].legend(facecolor=legend_bg_color)
+
+# Bar plot for temperature change, air, and water temperatures with Helvetica font
+df.plot(kind='bar', x='Location', y=['Temperature Change (°C)', 'Air Temperature (°C)', 'Water Temperature (°C)'], ax=ax[1], color=colors_temp_change)
+ax[1].set_title('Temperature Change, Air and Water Temperatures', color='white')
+ax[1].set_ylabel('Temperature (°C)', color='white')
+ax[1].grid(True, color='gray')
+ax[1].tick_params(colors='white', which='both')
+ax[1].set_facecolor(bg_color)
+for spine in ax[1].spines.values():
+    spine.set_edgecolor('white')
+ax[1].legend(facecolor=legend_bg_color)
+
+plt.tight_layout()
+plt.show()
