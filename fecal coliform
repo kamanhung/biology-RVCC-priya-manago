@@ -10,17 +10,18 @@ positive_result_data = {
 # Convert to DataFrame
 positive_result_df = pd.DataFrame(positive_result_data)
 
-# Plotting
+# Converting the chart to a horizontal column chart
+
+# Plotting horizontal column chart
 fig, ax = plt.subplots(figsize=(10, 6), facecolor='#051b56')
 
-# Bar plot for the provided data
-positive_result_df.plot(kind='bar', x='Tube Volume', y=['RVCC Pond', 'MUSCONETCONG River'], ax=ax, color=["#fc6244", "#0298ac"])
+# Horizontal bar plot for the provided data
+positive_result_df.plot(kind='barh', x='Tube Volume', y=['RVCC Pond', 'MUSCONETCONG River'], ax=ax, color=["#fc6244", "#0298ac"])
 ax.set_title('Number with a Positive Result by Tube Volume', color='white', fontsize=14, fontweight='bold')
-ax.set_ylabel('Number with Positive Result', color='white', fontsize=12)
-ax.set_xlabel('Tube Volume', color='white', fontsize=12)
+ax.set_xlabel('Number with Positive Result', color='white', fontsize=12)
+ax.set_ylabel('Tube Volume', color='white', fontsize=12)
 ax.grid(True, color='gray')
 ax.tick_params(colors='white', which='both')
-ax.set_xticklabels(positive_result_df['Tube Volume'], rotation=0)  # Horizontal labels
 ax.set_facecolor('#051b56')
 for spine in ax.spines.values():
     spine.set_edgecolor('white')
